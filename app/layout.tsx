@@ -13,6 +13,7 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: 'PSC Classes - Complete Learning Management System',
   description: 'A comprehensive education center for computer courses, spoken English, and professional development',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
   icons: {
     icon: [
       {
@@ -35,7 +36,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logo.png" sizes="64x64" type="image/png" />
       </head>
-      <body className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}>
+      <body className={cn('min-h-screen bg-background font-sans antialiased overflow-x-hidden', fontSans.variable)}>
         <Providers>
           <Preloader />
           {children}
