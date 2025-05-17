@@ -1,28 +1,14 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter as FontSans } from 'next/font/google';
-import { cn } from '@/lib/utils';
+import { Inter } from 'next/font/google';
 import { RootLayoutClient } from '@/components/root-layout-client';
+import { ProtectionWrapper } from '@/components/protection-wrapper';
 
-const fontSans = FontSans({
-  subsets: ['latin'],
-  variable: '--font-sans',
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'PSC Classes - Complete Learning Management System',
-  description: 'A comprehensive education center for computer courses, spoken English, and professional development',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  icons: {
-    icon: [
-      {
-        url: '/logo.png',
-        href: '/logo.png',
-        sizes: '64x64',
-        type: 'image/png',
-      }
-    ]
-  }
+  title: 'PSC Classes',
+  description: 'PSC Classes - Your Gateway to Success',
 };
 
 export default function RootLayout({
@@ -32,13 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/logo.png" sizes="64x64" type="image/png" />
-      </head>
-      <body className={cn('min-h-screen bg-background font-sans antialiased overflow-x-hidden', fontSans.variable)}>
-        <RootLayoutClient>
-          {children}
-        </RootLayoutClient>
+      <body className={inter.className}>
+        <ProtectionWrapper>
+          <RootLayoutClient>
+            {children}
+          </RootLayoutClient>
+        </ProtectionWrapper>
       </body>
     </html>
   );

@@ -13,6 +13,22 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+/* Prevent text selection */
+* {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+/* Allow text selection in specific elements where it might be needed */
+input, 
+textarea, 
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

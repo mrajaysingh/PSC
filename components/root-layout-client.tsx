@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { WarningModal } from "@/components/ui/warning-modal";
 import { Providers } from '@/app/providers';
 import { Preloader } from '@/components/preloader';
+import { Toaster } from '@/components/ui/toaster';
 
 interface RootLayoutClientProps {
   children: React.ReactNode;
@@ -38,6 +39,7 @@ export function RootLayoutClient({ children }: RootLayoutClientProps) {
         <Preloader />
         {children}
         <WarningModal isOpen={showWarning} onAcknowledge={handleAcknowledge} />
+        <Toaster />
       </Providers>
     </ThemeProvider>
   );
