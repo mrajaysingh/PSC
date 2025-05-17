@@ -12,21 +12,42 @@ interface RootLayoutClientProps {
 }
 
 export function RootLayoutClient({ children }: RootLayoutClientProps) {
-  const [showWarning, setShowWarning] = useState(true);
+  const [showWarning, setShowWarning] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     // Check if user has already acknowledged in this session
-    const hasAcknowledged = sessionStorage.getItem('warningAcknowledged');
-    if (hasAcknowledged) {
-      setShowWarning(false);
+    const hasAcknowledged = window?.sessionStorage?.getItem('warningAcknowledged');
+    if (!hasAcknowledged) {
+      setShowWarning(true);
     }
   }, []);
 
   const handleAcknowledge = () => {
     // Store acknowledgment in session storage (cleared when browser closes)
-    sessionStorage.setItem('warningAcknowledged', 'true');
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.setItem('warningAcknowledged', 'true');
+    }
     setShowWarning(false);
   };
+
+  if (!isMounted) {
+    return (
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <Providers>
+          <Preloader />
+          {children}
+          <Toaster />
+        </Providers>
+      </ThemeProvider>
+    );
+  }
 
   return (
     <ThemeProvider
