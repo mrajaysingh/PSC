@@ -10,12 +10,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { Badge } from '@/components/ui/badge';
 
 const staffMembers = [
   {
     name: "Vandana Shukla",
     image: "/staff/Vandana-shukla.jpg",
     qualifications: "BCA, MCA",
+    role: "Computer Science Tuitor",
     description: [
       "A dedicated educator with expertise in computer science and technology. With her strong academic background in BCA and MCA, Vandana brings extensive knowledge and practical experience to the classroom.",
       "Her teaching methodology focuses on combining theoretical concepts with hands-on practical applications, ensuring students develop both understanding and practical skills. She specializes in programming fundamentals, web development, and computer applications.",
@@ -27,6 +29,7 @@ const staffMembers = [
     name: "Shalu Shukla",
     image: "/staff/shalu-dwivedi.jpg",
     qualifications: "M.SC, B.Ed",
+    role: "Assistant Teacher",
     description: [
       "A passionate educator with a strong foundation in science and education. Her M.SC and B.Ed qualifications reflect her deep understanding of both subject matter and teaching methodologies.",
       "She brings a unique blend of theoretical knowledge and practical teaching experience to the classroom, making complex concepts accessible and engaging for students.",
@@ -38,10 +41,11 @@ const staffMembers = [
     name: "Sheetal Tripathi",
     image: "/staff/sheetal-tripathi.jpg",
     qualifications: "Graduate",
+    role: "Accountant Department",
     description: [
-      "A committed educator who brings fresh perspectives and innovative teaching methods to the classroom. Her dedication to student success and continuous learning sets her apart.",
-      "She excels in creating an engaging learning environment where students feel comfortable asking questions and exploring new concepts. Her teaching approach emphasizes practical understanding and real-world applications.",
-      "Known for her ability to connect with students and provide individualized attention, she ensures that each student receives the support they need to excel in their studies."
+      "A dedicated professional serving as both an educator and the Accountant at PSC Classes. Her dual role brings a unique perspective to the institution's operations.",
+      "As an Accountant, she manages the financial aspects of PSC Classes with precision and professionalism, ensuring smooth administrative operations. Her organizational skills and attention to detail contribute significantly to the institution's efficient management.",
+      "In her teaching role, she creates an engaging learning environment where students feel comfortable asking questions and exploring new concepts. Her practical approach helps students grasp complex topics effectively."
     ],
     email: "sheetaltripathi@pscclasses.com"
   }
@@ -52,16 +56,13 @@ export function StaffSection() {
     <section className="py-16 bg-background">
       <div className="container">
         <motion.div 
-          className="text-center max-w-3xl mx-auto mb-8"
+          className="text-center md:text-left max-w-3xl mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Excellent Staff</h2>
-          <p className="text-lg text-muted-foreground">
-            Meet our dedicated team of educators shaping futures at PSC Classes
-          </p>
         </motion.div>
 
         <Carousel
@@ -70,9 +71,20 @@ export function StaffSection() {
             loop: true,
             startIndex: 0
           }}
-          className="w-full"
+          className="w-full relative"
         >
-          <div className="flex justify-between items-center mb-8 lg:hidden">
+          <div className="flex items-start justify-between mb-8">
+            <p className="text-lg text-muted-foreground max-w-3xl">
+              Meet our dedicated team of educators shaping futures at PSC Classes
+            </p>
+            <div className="hidden md:flex items-center gap-4 -mt-1">
+              <CarouselPrevious className="relative h-10 w-10 bg-background hover:bg-muted static" />
+              <CarouselNext className="relative h-10 w-10 bg-background hover:bg-muted static" />
+            </div>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="flex justify-between items-center mb-8 md:hidden">
             <CarouselPrevious className="relative h-8 w-8 translate-y-0 bg-background hover:bg-muted static" />
             <CarouselNext className="relative h-8 w-8 translate-y-0 bg-background hover:bg-muted static" />
           </div>
@@ -87,7 +99,7 @@ export function StaffSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                   >
-                    <Card className="overflow-hidden">
+                    <Card className="overflow-hidden cursor-pointer hover:shadow-lg transition-shadow">
                       <img
                         src={staff.image}
                         alt={staff.name}
@@ -101,14 +113,17 @@ export function StaffSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.2 }}
-                    className="flex flex-col h-full lg:pl-6"
+                    className="flex flex-col h-full lg:pl-6 cursor-pointer"
                   >
                     <div className="flex-none">
                       <h3 className="text-2xl sm:text-3xl font-bold mb-2">{staff.name}</h3>
-                      <div className="flex items-center gap-2 text-primary mb-4">
+                      <div className="flex items-center gap-2 text-primary mb-3">
                         <GraduationCap className="h-5 w-5" />
                         <span className="font-medium">{staff.qualifications}</span>
                       </div>
+                      <Badge variant="secondary" className="text-base font-medium mb-4">
+                        {staff.role}
+                      </Badge>
                     </div>
                     
                     <div className="flex-grow min-h-[200px] space-y-4 mb-6">
@@ -134,10 +149,6 @@ export function StaffSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="hidden lg:flex justify-center mt-8 gap-4">
-            <CarouselPrevious />
-            <CarouselNext />
-          </div>
         </Carousel>
       </div>
     </section>

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Mail, Phone, MessageCircle, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ScheduleMeetingDialog } from '@/components/schedule-meeting-dialog';
 
 export function FounderSection() {
   return (
@@ -58,9 +59,7 @@ export function FounderSection() {
             </div>
 
             <div className="mt-8">
-              <Button size="lg" className="w-full sm:w-auto">
-                Schedule a Meeting
-              </Button>
+              <ScheduleMeetingDialog />
             </div>
           </motion.div>
         </div>

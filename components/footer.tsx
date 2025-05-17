@@ -1,8 +1,13 @@
+'use client';
+
 import Link from 'next/link';
 import { Facebook, Instagram, Linkedin, Twitter } from 'lucide-react';
+import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const { theme } = useTheme();
 
   return (
     <footer className="bg-card text-card-foreground pt-16 border-t">
@@ -10,8 +15,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <img src="/logo.png" alt="PSC Classes Logo" className="h-12 w-12" />
-              <span className="font-bold text-lg">PSC Classes</span>
+              <img src="/logo.png" alt="PSC Classes Logo" className="h-16 w-16" />
+              <span className="font-bold text-xl">PSC Classes</span>
             </div>
             <p className="text-muted-foreground">
               Providing quality education and skill development since 2016. Transforming careers with industry-focused training.
@@ -56,8 +61,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/register" className="text-muted-foreground hover:text-primary transition-colors">
-                  Register
+                <Link href="/verify-certificate" className="text-muted-foreground hover:text-primary transition-colors">
+                  Verify Certificate
                 </Link>
               </li>
             </ul>
@@ -67,28 +72,43 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-6">Programs</h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/courses/technical" className="text-muted-foreground hover:text-primary transition-colors">
-                  Technical Courses
+                <Link 
+                  href="/courses?category=Web Development" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Web Development
                 </Link>
               </li>
               <li>
-                <Link href="/courses/professional" className="text-muted-foreground hover:text-primary transition-colors">
-                  Professional Development
+                <Link 
+                  href="/courses?category=Computer" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Computer Courses
                 </Link>
               </li>
               <li>
-                <Link href="/courses/certifications" className="text-muted-foreground hover:text-primary transition-colors">
-                  Certification Programs
+                <Link 
+                  href="/courses?category=Programming" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Programming
                 </Link>
               </li>
               <li>
-                <Link href="/courses/offline" className="text-muted-foreground hover:text-primary transition-colors">
-                  Offline Classes
+                <Link 
+                  href="/courses?category=Language" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Language Courses
                 </Link>
               </li>
               <li>
-                <Link href="/courses/online" className="text-muted-foreground hover:text-primary transition-colors">
-                  Online Learning
+                <Link 
+                  href="/courses?category=Accounting" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  Accounting
                 </Link>
               </li>
             </ul>
@@ -97,16 +117,31 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-6">Contact Info</h3>
             <address className="not-italic">
-              <p className="mb-2 text-muted-foreground">123 Education Street</p>
-              <p className="mb-2 text-muted-foreground">Learning District, ED 54321</p>
+              <p className="mb-2 text-muted-foreground">PSC Classes, Near Govt. Hospital</p>
+              <p className="mb-2 text-muted-foreground">Perinthalmanna, Kerala 679322</p>
               <p className="mb-2 text-muted-foreground">info@pscclasses.com</p>
-              <p className="mb-2 text-muted-foreground">+1 (555) 123-4567</p>
+              <p className="mb-2 text-muted-foreground">+91 94532 57979</p>
             </address>
           </div>
         </div>
         
-        <div className="border-t py-6 text-center text-muted-foreground">
-          <p>© {currentYear} PSC Classes. All rights reserved.</p>
+        <div className="border-t py-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-center text-muted-foreground">© {currentYear} PSC Classes. All rights reserved.</p>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-muted-foreground">Powered by</span>
+              <a href="https://skybersupport.me" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <Image
+                  src={theme === 'light' ? '/AUTHORIZATION/skyber-light.png' : '/AUTHORIZATION/skyber.png'}
+                  alt="Skyber Logo"
+                  width={169}
+                  height={51}
+                  className="h-[52px] w-auto"
+                  priority
+                />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

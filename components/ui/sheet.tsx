@@ -74,6 +74,23 @@ const SheetContent = React.forwardRef<
 ));
 SheetContent.displayName = SheetPrimitive.Content.displayName;
 
+const SheetContentWithoutClose = React.forwardRef<
+  React.ElementRef<typeof SheetPrimitive.Content>,
+  SheetContentProps
+>(({ side = 'right', className, children, ...props }, ref) => (
+  <SheetPortal>
+    <SheetOverlay />
+    <SheetPrimitive.Content
+      ref={ref}
+      className={cn(sheetVariants({ side }), className)}
+      {...props}
+    >
+      {children}
+    </SheetPrimitive.Content>
+  </SheetPortal>
+));
+SheetContentWithoutClose.displayName = 'SheetContentWithoutClose';
+
 const SheetHeader = ({
   className,
   ...props
@@ -133,6 +150,7 @@ export {
   SheetTrigger,
   SheetClose,
   SheetContent,
+  SheetContentWithoutClose,
   SheetHeader,
   SheetFooter,
   SheetTitle,

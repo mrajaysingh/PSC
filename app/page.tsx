@@ -9,6 +9,7 @@ import { CTASection } from '@/components/cta-section';
 import { FounderSection } from '@/components/founder-section';
 import { GallerySection } from '@/components/gallery-section';
 import { StaffSection } from '@/components/staff-section';
+import { CertificateSection } from '@/components/certificate-section';
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
         <GallerySection />
         <StaffSection />
         <CoursesSection />
+        <CertificateSection />
         <TestimonialsSection />
         <StatsSection />
         <CTASection />

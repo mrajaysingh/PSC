@@ -2,8 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import { cn } from '@/lib/utils';
-import { Providers } from './providers';
-import { Preloader } from '@/components/preloader';
+import { RootLayoutClient } from '@/components/root-layout-client';
 
 const fontSans = FontSans({
   subsets: ['latin'],
@@ -37,10 +36,9 @@ export default function RootLayout({
         <link rel="icon" href="/logo.png" sizes="64x64" type="image/png" />
       </head>
       <body className={cn('min-h-screen bg-background font-sans antialiased overflow-x-hidden', fontSans.variable)}>
-        <Providers>
-          <Preloader />
+        <RootLayoutClient>
           {children}
-        </Providers>
+        </RootLayoutClient>
       </body>
     </html>
   );
