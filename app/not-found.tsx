@@ -3,11 +3,24 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import Lottie from "lottie-react";
-import notFoundAnimation from "@/public/animations/404-animation.json";
+import dynamic from 'next/dynamic';
+import { useState, useEffect } from 'react';
+
+// Dynamically import Lottie with no SSR
+const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
+const notFoundAnimation = require("@/public/animations/404-animation.json");
 
 export default function NotFound() {
   const router = useRouter();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // or a simple loading state
+  }
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-background">
@@ -68,11 +81,13 @@ export default function NotFound() {
               transition={{ duration: 0.5 }}
               className="w-full max-w-md mx-auto"
             >
-              <Lottie
-                animationData={notFoundAnimation}
-                loop={true}
-                className="w-full h-[300px] lg:h-[400px]"
-              />
+              {isMounted && (
+                <Lottie
+                  animationData={notFoundAnimation}
+                  loop={true}
+                  className="w-full h-[300px] lg:h-[400px]"
+                />
+              )}
             </motion.div>
           </div>
 
