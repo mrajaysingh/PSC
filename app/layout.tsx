@@ -7,6 +7,7 @@ import { ProtectionWrapper } from '@/components/protection-wrapper';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://pscclasses.com'),
   title: 'PSC Classes | Future Begins Here',
   description: 'PSC Classes - Your Gateway to Success. Join us for expert-led courses in Computer Science, Programming, English Speaking, and more. Transform your future with quality education.',
   keywords: 'PSC Classes, computer courses, programming, English speaking, education, professional training, skill development',
@@ -59,6 +60,15 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'your-google-verification-code',
+  },
+  alternates: {
+    canonical: 'https://pscclasses.com',
+    languages: {
+      'en-US': 'https://pscclasses.com',
+    },
+    types: {
+      'application/x-web-app-manifest+json': 'https://pscclasses.vercel.app',
+    },
   },
 };
 
