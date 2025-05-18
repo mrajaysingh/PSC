@@ -54,12 +54,12 @@ export function VerifyCertificateDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button size="sm" className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground">
+        <Button className="w-full gap-2 bg-primary hover:bg-primary/90 text-primary-foreground">
           <Award className="h-4 w-4" />
           Verify Certificate
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md max-w-[95%] rounded-[15px]">
         <DialogHeader>
           <DialogTitle>Verify Certificate</DialogTitle>
           <DialogDescription>

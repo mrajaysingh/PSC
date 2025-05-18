@@ -446,42 +446,227 @@ export function Header() {
                     </Button>
                   </SheetTrigger>
                 </div>
-
-                <div className="flex-1 overflow-auto py-4">
-                  <nav className="flex flex-col space-y-1">
+                <div className="flex-1 overflow-y-auto">
+                  <nav className="flex flex-col p-4 space-y-8">
+                    {/* Main Navigation */}
+                    <div>
+                      <h3 className="text-lg font-bold mb-4 text-foreground px-3">Main Navigation</h3>
+                      <div className="space-y-3 bg-muted/50 rounded-xl p-3">
                     <Link 
                       href="/"
-                      className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted transition-colors"
-                    >
-                      <Home className="h-4 w-4" />
-                      Home
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <Home className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Home</div>
+                            <div className="text-sm text-muted-foreground">Back to homepage</div>
+                          </div>
                     </Link>
                     <Link 
                       href="/courses"
-                      className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted transition-colors"
-                    >
-                      <BookOpenCheck className="h-4 w-4" />
-                      Courses
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <BookOpenCheck className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Courses</div>
+                            <div className="text-sm text-muted-foreground">Browse our courses</div>
+                          </div>
                     </Link>
+                      </div>
+                    </div>
+
+                    {/* Company Section */}
+                    <div>
+                      <h3 className="text-lg font-bold mb-4 text-foreground px-3">Company</h3>
+                      <div className="space-y-3 bg-muted/50 rounded-xl p-3">
                     <Link 
                       href="/about"
-                      className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted transition-colors"
-                    >
-                      <Users className="h-4 w-4" />
-                      About
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <Users className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">About</div>
+                            <div className="text-sm text-muted-foreground">Learn about our mission</div>
+                          </div>
                     </Link>
                     <Link 
                       href="/contact"
-                      className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted transition-colors"
-                    >
-                      <Contact className="h-4 w-4" />
-                      Contact
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <Contact className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Contact</div>
+                            <div className="text-sm text-muted-foreground">Get in touch with us</div>
+                          </div>
+                        </Link>
+                        <Link 
+                          href="/instructors" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <GraduationCap className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Instructor Profiles</div>
+                            <div className="text-sm text-muted-foreground">Meet our expert instructors</div>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Legal Section */}
+                    <div>
+                      <h3 className="text-lg font-bold mb-4 text-foreground px-3">Legal</h3>
+                      <div className="space-y-3 bg-muted/50 rounded-xl p-3">
+                        <Link 
+                          href="/terms" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <FileText className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Terms & Conditions</div>
+                            <div className="text-sm text-muted-foreground">Our terms of service</div>
+                          </div>
+                        </Link>
+                        <Link 
+                          href="/privacy" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <Shield className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Privacy Policy</div>
+                            <div className="text-sm text-muted-foreground">How we protect your data</div>
+                          </div>
+                        </Link>
+                        <Link 
+                          href="/refund" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <RefreshCw className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Refund Policy</div>
+                            <div className="text-sm text-muted-foreground">Money-back guarantee terms</div>
+                          </div>
+                        </Link>
+                        <Link 
+                          href="/disclaimer" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <AlertCircle className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Disclaimer</div>
+                            <div className="text-sm text-muted-foreground">Important notices</div>
+                          </div>
+                        </Link>
+                        <Link 
+                          href="/code-of-conduct" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <UserCheck className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Code of Conduct</div>
+                            <div className="text-sm text-muted-foreground">Community guidelines</div>
+                          </div>
+                        </Link>
+                        <Link 
+                          href="/copyright" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <Copyright className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Copyright Policy</div>
+                            <div className="text-sm text-muted-foreground">IP protection</div>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Help Section */}
+                    <div>
+                      <h3 className="text-lg font-bold mb-4 text-foreground px-3">Help</h3>
+                      <div className="space-y-3 bg-muted/50 rounded-xl p-3">
+                        <Link 
+                          href="/faqs" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <HelpCircle className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">FAQs</div>
+                            <div className="text-sm text-muted-foreground">Frequently asked questions</div>
+                          </div>
+                        </Link>
+                        <Link 
+                          href="/support" 
+                          className="flex items-center gap-3 p-3 text-base hover:bg-muted transition-all duration-200 rounded-lg bg-background/80"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <div className="p-2 rounded-md bg-primary/10 text-primary">
+                            <HeadphonesIcon className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <div className="font-semibold">Support / Help Center</div>
+                            <div className="text-sm text-muted-foreground">Get help with queries</div>
+                          </div>
                     </Link>
+                      </div>
+                    </div>
+
+                    {/* Featured Image - Same as Sidebar */}
+                    <div className="px-3">
+                      <div className="relative h-48 rounded-xl overflow-hidden group">
+                        <img 
+                          src="https://res.cloudinary.com/dwos0fnlt/image/upload/v1747489991/campus.webp" 
+                          alt="Campus Preview" 
+                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent flex items-end p-6">
+                          <div className="text-white">
+                            <h4 className="text-xl font-bold mb-1">Visit Our Campus</h4>
+                            <p className="text-white/90">Experience world-class facilities</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </nav>
                 </div>
-
-                <div className="border-t p-4">
+                <div className="p-4 border-t">
+                  <div className="w-[95%] mx-auto">
                   <VerifyCertificateDialog />
+                  </div>
                 </div>
               </div>
             </SheetContentWithoutClose>

@@ -33,7 +33,7 @@ export function WarningModal({ isOpen, onAcknowledge }: WarningModalProps) {
 
   return (
     <Dialog modal open={isOpen} onOpenChange={() => {}}>
-      <DialogContent className="p-0 border-none sm:max-w-[600px] max-w-[95%] !bg-[#020817] dark overflow-y-auto max-h-[90vh]" hideCloseButton>
+      <DialogContent className="p-0 border-none sm:max-w-[600px] max-w-[90%] !bg-[#020817] dark overflow-y-auto max-h-[90vh] rounded-[15px]" hideCloseButton>
         <div className="p-4 sm:p-6">
           {/* Logo and Header */}
           <div className="flex flex-col items-center mb-4 sm:mb-6">
