@@ -26,7 +26,7 @@ const staffMembers = [
     email: "vandana.shukla@pscclasses.com"
   },
   {
-    name: "Shalu Shukla",
+    name: "Shalu Dwivedi",
     image: "/staff/shalu-dwivedi.jpg",
     qualifications: "M.SC, B.Ed",
     role: "Assistant Teacher",

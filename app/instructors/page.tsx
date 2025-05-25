@@ -37,7 +37,7 @@ const instructors = [
     }
   },
   {
-    name: "Shalu Shukla",
+    name: "Shalu Dwivedi",
     role: "Science Instructor",
     image: "/instructor/shalu-dwivedi.jpg",
     bio: "A passionate educator with a strong foundation in science and education. Her M.SC and B.Ed qualifications reflect her deep understanding of both subject matter and teaching methodologies. She brings a unique blend of theoretical knowledge and practical teaching experience to the classroom.",
