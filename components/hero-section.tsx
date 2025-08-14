@@ -45,9 +45,11 @@ export function HeroSection() {
               <div className="p-4 sm:p-6">
                 <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-2">Join Our Learning Community</h3>
                 <p className="text-sm sm:text-base text-muted-foreground mb-4">Get access to expert instructors, industry-relevant curriculum, and a supportive learning environment.</p>
-                <Link href="/courses" className="w-full block">
-                  <Button className="w-full">Explore Courses</Button>
-                </Link>
+                <div className="w-full block">
+                  <Link href="/courses">
+                    <Button className="w-full">Explore Courses</Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -77,17 +79,21 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start px-4 sm:px-0"
             >
-              <Link href="/courses" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full sm:w-auto group">
-                  Explore Courses
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
-              <Link href="/about" className="w-full sm:w-auto">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                  Explore Campus
-                </Button>
-              </Link>
+              <div className="w-full sm:w-auto">
+                <Link href="/courses">
+                  <Button size="lg" className="w-full sm:w-auto group">
+                    Explore Courses
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
+              <div className="w-full sm:w-auto">
+                <Link href="/about">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    Explore Campus
+                  </Button>
+                </Link>
+              </div>
             </motion.div>
             
             <motion.div 
