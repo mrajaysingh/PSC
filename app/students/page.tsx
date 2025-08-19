@@ -7,39 +7,54 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Search, Users, Star, GraduationCap, Award, Trophy } from 'lucide-react';
+import { Search, Users, Star, GraduationCap, Award, Trophy, Medal } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import { studentsData, stats } from './data';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function StudentsPage() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState('all');
+  const [studentFilter, setStudentFilter] = useState('all');
+  const [classFilter, setClassFilter] = useState('all');
 
-  // Filter students based on search query
+  // Get unique classes for dropdown
+  const uniqueClasses = useMemo(() => {
+    const allStudents = [...studentsData.boys, ...studentsData.girls];
+    const classes = Array.from(new Set(allStudents.map(student => student.class)));
+    return classes.sort();
+  }, []);
+
+  // Filter students based on search query and filters
   const filteredStudents = useMemo(() => {
     const query = searchQuery.toLowerCase();
-    const allStudents = [...studentsData.boys, ...studentsData.girls];
+    let allStudents = [...studentsData.boys, ...studentsData.girls];
 
+    // Apply student filter (all, boys, girls)
+    if (studentFilter === 'boys') {
+      allStudents = studentsData.boys;
+    } else if (studentFilter === 'girls') {
+      allStudents = studentsData.girls;
+    }
+
+    // Apply class filter
+    if (classFilter !== 'all') {
+      allStudents = allStudents.filter(student => student.class === classFilter);
+    }
+
+    // Apply search query
     if (!query) {
-      if (activeTab === 'boys') return studentsData.boys;
-      if (activeTab === 'girls') return studentsData.girls;
       return allStudents;
     }
 
-    const filtered = allStudents.filter(student =>
+    return allStudents.filter(student =>
       student.name.toLowerCase().includes(query) ||
       student.fatherName.toLowerCase().includes(query) ||
       student.class.toLowerCase().includes(query) ||
       student.enrollmentId.toLowerCase().includes(query)
     );
-
-    if (activeTab === 'boys') return filtered.filter(student => studentsData.boys.some(boy => boy.id === student.id));
-    if (activeTab === 'girls') return filtered.filter(student => studentsData.girls.some(girl => girl.id === student.id));
-
-    return filtered;
-  }, [searchQuery, activeTab]);
+  }, [searchQuery, studentFilter, classFilter]);
 
   const getInitials = (name: string) => {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
@@ -97,6 +112,22 @@ export default function StudentsPage() {
                   );
                 })}
               </div>
+              
+              {/* Filter Options */}
+              <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground mt-8">
+                <div className="flex items-center gap-2">
+                  <Trophy className="h-4 w-4 text-yellow-600" />
+                  <span>Academic Excellence</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Medal className="h-4 w-4 text-blue-600" />
+                  <span>Competition Winners</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Award className="h-4 w-4 text-green-600" />
+                  <span>Leadership Awards</span>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -108,29 +139,74 @@ export default function StudentsPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="max-w-4xl mx-auto"
+              className="max-w-6xl mx-auto"
             >
-              <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+              <div className="flex flex-col gap-6">
                 {/* Search Bar */}
-                <div className="relative flex-1 max-w-md">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                  <Input
-                    type="text"
-                    placeholder="Search by name, father's name, class, or enrollment ID..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 border-2 border-yellow-400/50 focus:border-yellow-400 focus:ring-yellow-400/20"
-                  />
+                <div className="flex flex-col lg:flex-row gap-4 items-center justify-center">
+                  <div className="relative flex-1 max-w-md">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                    <Input
+                      type="text"
+                      placeholder="Search by name, father's name, class, or enrollment ID..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="pl-10 border-2 border-yellow-400/50 focus:border-yellow-400 focus:ring-yellow-400/20"
+                    />
+                  </div>
                 </div>
 
-                {/* Batch Filter */}
-                <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full lg:w-auto">
-                  <TabsList className="grid w-full grid-cols-3 lg:w-auto border-2 border-yellow-400/50 p-1">
-                    <TabsTrigger value="all" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-yellow-950 data-[state=active]:shadow-sm">All Students</TabsTrigger>
-                    <TabsTrigger value="boys" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-yellow-950 data-[state=active]:shadow-sm">Boys Batch</TabsTrigger>
-                    <TabsTrigger value="girls" className="data-[state=active]:bg-yellow-400 data-[state=active]:text-yellow-950 data-[state=active]:shadow-sm">Girls Batch</TabsTrigger>
-                  </TabsList>
-                </Tabs>
+                {/* Filter Options */}
+                <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                  {/* Student Type Filter */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-muted-foreground">Students:</span>
+                    <div className="flex gap-1">
+                      <Button
+                        variant={studentFilter === 'all' ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setStudentFilter('all')}
+                        className="text-xs"
+                      >
+                        All Students
+                      </Button>
+                      <Button
+                        variant={studentFilter === 'boys' ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setStudentFilter('boys')}
+                        className="text-xs"
+                      >
+                        Boys
+                      </Button>
+                      <Button
+                        variant={studentFilter === 'girls' ? 'default' : 'outline'}
+                        size="sm"
+                        onClick={() => setStudentFilter('girls')}
+                        className="text-xs"
+                      >
+                        Girls
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Class Filter */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-muted-foreground">Class:</span>
+                    <Select value={classFilter} onValueChange={setClassFilter}>
+                      <SelectTrigger className="w-32 border-2 border-yellow-400/50 focus:border-yellow-400 focus:ring-yellow-400/20">
+                        <SelectValue placeholder="All Classes" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Classes</SelectItem>
+                        {uniqueClasses.map((className) => (
+                          <SelectItem key={className} value={className}>
+                            {className}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -145,10 +221,7 @@ export default function StudentsPage() {
               transition={{ duration: 0.5 }}
               className="text-center mb-12"
             >
-              <h2 className="text-3xl font-bold mb-4">
-                {activeTab === 'boys' ? 'Boys Batch' :
-                  activeTab === 'girls' ? 'Girls Batch' : 'All Students'}
-              </h2>
+              <h2 className="text-3xl font-bold mb-4">Our Star Students</h2>
               <p className="text-muted-foreground">
                 {filteredStudents.length} student{filteredStudents.length !== 1 ? 's' : ''} found
               </p>
@@ -178,13 +251,23 @@ export default function StudentsPage() {
                     <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group border-2 border-yellow-400/50 shadow-lg hover:shadow-yellow-400/20">
                       <div className="relative">
                         {/* Student Photo */}
-                        <div className="aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                        <div className="aspect-square bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center relative">
                           <Avatar className="h-32 w-32 border-4 border-white shadow-lg">
                             <AvatarImage src={student.photo} alt={student.name} />
                             <AvatarFallback className="text-2xl font-bold bg-primary/10 text-primary">
                               {getInitials(student.name)}
                             </AvatarFallback>
                           </Avatar>
+                          
+                          {/* Desktop Hover Buttons */}
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2 hidden md:flex">
+                            <Button size="sm" className="bg-primary hover:bg-primary/90 text-white">
+                              View Result
+                            </Button>
+                            <Button size="sm" variant="secondary" className="bg-white hover:bg-gray-100 text-gray-900">
+                              Pay Fee
+                            </Button>
+                          </div>
                         </div>
                       </div>
 
@@ -200,9 +283,19 @@ export default function StudentsPage() {
                           <Badge variant="outline" className="mb-3">
                             {student.class}
                           </Badge>
-                          <p className="text-xs text-muted-foreground font-mono">
+                          <p className="text-xs text-muted-foreground font-mono mb-4">
                             ID: {student.enrollmentId}
                           </p>
+                          
+                          {/* Mobile Buttons */}
+                          <div className="flex gap-2 justify-center md:hidden">
+                            <Button size="sm" className="bg-primary hover:bg-primary/90 text-white text-xs">
+                              View Result
+                            </Button>
+                            <Button size="sm" variant="secondary" className="bg-gray-100 hover:bg-gray-200 text-gray-900 text-xs">
+                              Pay Fee
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </Card>

@@ -3,6 +3,7 @@
 import { useProtection } from '@/hooks/useProtection';
 
 export function ProtectionWrapper({ children }: { children: React.ReactNode }) {
-  useProtection();
+  const { isProtectionDisabled } = useProtection();
+  
   return <>{children}</>;
 } 

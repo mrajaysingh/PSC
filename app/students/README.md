@@ -42,7 +42,7 @@ Each student card shows:
 
 ### Adding New Students
 
-1. **Edit the data file**: `app/students/data.ts`
+1. **Edit the data file**: `app/our-star/data.ts`
 2. **Add student information**:
    ```typescript
    {

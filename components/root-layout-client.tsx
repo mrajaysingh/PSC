@@ -6,6 +6,8 @@ import { WarningModal } from "@/components/ui/warning-modal";
 import { Providers } from '@/app/providers';
 import { Preloader } from '@/components/preloader';
 import { Toaster } from '@/components/ui/toaster';
+import { FloatingAdminButton } from '@/components/floating-admin-button';
+import { ProtectionStatus } from '@/components/protection-status';
 
 interface RootLayoutClientProps {
   children: React.ReactNode;
@@ -43,6 +45,8 @@ export function RootLayoutClient({ children }: RootLayoutClientProps) {
         <Providers>
           <Preloader />
           {children}
+          <FloatingAdminButton />
+          <ProtectionStatus />
           <Toaster />
         </Providers>
       </ThemeProvider>
@@ -59,6 +63,8 @@ export function RootLayoutClient({ children }: RootLayoutClientProps) {
       <Providers>
         <Preloader />
         {children}
+        <FloatingAdminButton />
+        <ProtectionStatus />
         <WarningModal isOpen={showWarning} onAcknowledge={handleAcknowledge} />
         <Toaster />
       </Providers>
