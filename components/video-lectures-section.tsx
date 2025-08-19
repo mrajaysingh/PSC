@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Play, Clock, Users, Star, IndianRupee, ShoppingCart, Download, Lock, Unlock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -144,7 +143,7 @@ const videoLectures = [
 ];
 
 export function VideoLecturesSection() {
-  const { addToCart, cartItems } = useCart();
+  const { addToCart, state } = useCart();
 
   const handleAddToCart = (video: typeof videoLectures[0]) => {
     addToCart({
@@ -171,36 +170,26 @@ export function VideoLecturesSection() {
     window.location.href = '/cart';
   };
 
-
-
   return (
     <section className="py-16 bg-gradient-to-br from-background to-muted/20">
       <div className="container">
-        <motion.div 
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Video Lecture Library
           </h2>
           <p className="text-lg text-muted-foreground">
             Learn from expert instructors with our comprehensive video lectures. Mix of free and premium content to suit every learner.
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {videoLectures.map((video, index) => (
-            <motion.div
+            <div
               key={video.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2"
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              <Card className="h-full border-2 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] transform-gpu bg-gradient-to-br from-card to-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20">
+              <Card className="h-full border-2 hover:border-primary/50 transition-all duration-500 hover:shadow-2xl transform-gpu bg-gradient-to-br from-card to-card/80 backdrop-blur-sm shadow-lg hover:shadow-primary/20">
                 <CardHeader className="pb-4">
                   <div className="relative">
                     <img 
@@ -332,22 +321,16 @@ export function VideoLecturesSection() {
                   </div>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* View All Button */}
-        <motion.div 
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-        >
+        <div className="text-center mt-12">
           <Button size="lg" className="px-8">
             View All Video Lectures
           </Button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
