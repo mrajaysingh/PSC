@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ThemeToggle } from '@/components/theme-toggle';
+
 import { 
   BookOpen, 
   Menu, 
@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContentWithoutClose, SheetTrigger } from '@/components/ui/sheet';
 import { VerifyCertificateDialog } from '@/components/verify-certificate-dialog';
+import { CartIcon } from '@/components/cart-icon';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -436,14 +437,14 @@ export function Header() {
           </NavigationMenu>
 
           <div className="flex items-center space-x-2 ml-4">
-            <ThemeToggle />
             <VerifyCertificateDialog />
+            <CartIcon />
           </div>
         </div>
 
         {/* Mobile Navigation */}
         <div className="md:hidden flex items-center gap-2">
-          <ThemeToggle />
+          <CartIcon />
           
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>

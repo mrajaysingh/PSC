@@ -11,6 +11,10 @@ import { FounderSection } from '@/components/founder-section';
 import { GallerySection } from '@/components/gallery-section';
 import { StaffSection } from '@/components/staff-section';
 import { CertificateSection } from '@/components/certificate-section';
+import { PdfNotesSection } from '@/components/pdf-notes-section';
+import { VideoLecturesSection } from '@/components/video-lectures-section';
+import { FloatingThemeToggle } from '@/components/floating-theme-toggle';
+import { FloatingAdminButton } from '@/components/floating-admin-button';
 
 export default function Home() {
   return (
@@ -21,6 +25,8 @@ export default function Home() {
         <FounderSection />
         <FeaturesSection />
         <PricingSection />
+        <PdfNotesSection />
+        <VideoLecturesSection />
         <GallerySection />
         <StaffSection />
         <CoursesSection />
@@ -30,6 +36,8 @@ export default function Home() {
         <CTASection />
       </main>
       <Footer />
+      <FloatingThemeToggle />
+      <FloatingAdminButton />
     </>
   );
 }
